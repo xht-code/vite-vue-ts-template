@@ -1,16 +1,97 @@
-# Vue 3 + TypeScript + Vite
+<h1 align="center">Vite + Vue 3 + TypeScript</h1>
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+<p align="center">开箱即用，快速搭建 Vue3 移动端项目</p>
 
-## Recommended IDE Setup
+<p align="center">
+  <img src="https://img.shields.io/github/license/xht-code/vite-vue-ts-template" alt="license" />
+  <img src="https://img.shields.io/github/package-json/v/xht-code/vite-vue-ts-template" alt="version" />
+  <img src="https://img.shields.io/github/repo-size/xht-code/vite-vue-ts-template" alt="repo-size" />
+  <img src="https://img.shields.io/github/languages/top/xht-code/vite-vue-ts-template" alt="languages" />
+  <img src="https://img.shields.io/github/issues-closed/xht-code/vite-vue-ts-template" alt="issues" />
+</p>
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+## 介绍
 
-## Type Support For `.vue` Imports in TS
+本项目为 `Vue3` 移动端模板。
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+模板集成：`Vite` + `Vue 3` + `Vue Router` + `VueUse` + `Vant` + `Axios` + `TypeScript` + `Windi CSS` + `ESLint` + `Prettier`
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+## 安装
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+> 推荐使用 `pnpm`
+
+```shell
+# 克隆项目
+git clone https://github.com/xht-code/vite-vue-ts-template.git
+
+# 进入项目目录
+cd vite-vue-ts-template
+
+# 安装依赖
+pnpm i
+
+# 启动项目
+pnpm dev
+```
+
+## 特性
+
+### 自动生成路由
+
+只需在 `views` 目录下新增 `.vue` 文件，即可按目录生成路由，而 `components` 目录下会自动忽略。
+
+**另可通过 `route` 标签自定义页面 `meta` 等属性。**
+
+```html
+<route lang="json5"> { meta: { title: 'Home' } } </route>
+```
+
+### 组件自动引入
+
+不需要写`import`，直接调用即可。
+
+```html
+<van-button type="primary">Button</van-button>
+```
+
+### 支持 TSX
+
+编写页面更灵活。
+
+```tsx
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  render(props: Record<string, any>) {
+    return <div {...props}>TSX</div>
+  }
+})
+```
+
+### 封装 useRequest
+
+基于 `useAxios` 封装了 `useRequest`，支持 `axios` 配置的拦截器等。
+
+```js
+import { useRequest } from '@/utils/request'
+
+// 直接发起 GET 请求
+const { data } = useRequest('/api1')
+
+// 延迟发起 POST 请求
+const { execute, data } = useRequest(
+  {
+    method: 'POST',
+    url: '/test2'
+  },
+  { immediate: false }
+)
+```
+
+详细可查阅文档 [useAxios]('https://vueuse.org/integrations/useaxios/')
+
+## 致谢
+
+感谢您的阅读，若有问题可提 [issues]('https://github.com/xht-code/vite-vue-ts-template/issues')，也欢迎各位 PR。
+
+Enjoy coding~
